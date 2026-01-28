@@ -891,6 +891,128 @@ form button:hover {
     opacity: 1;
     transform: translateX(0);
 }
+
+/* ===== ОТЗЫВЫ ===== */
+
+#reviews {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.review-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 16px 18px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.review-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffad14;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.review-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.stars {
+    font-size: 14px;
+    color: #ffad14;
+}
+
+/* Кнопка показать */
+.reviews-toggle {
+    margin: 20px auto 0;
+    display: block;
+    padding: 10px 22px;
+    background: #ffad14;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Форма */
+.review-form {
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.review-form h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.review-form button {
+    width: 100%;
+    padding: 10px;
+    background: #ffad14;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Звёзды */
+.rating {
+    display: flex;
+    gap: 5px;
+    font-size: 22px;
+    color: #ddd;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.rating span.active {
+    color: #ffad14;
+}
     </style>
 </head>
     <body>
@@ -1392,12 +1514,13 @@ form button:hover {
         <button>ОТПРАВИТЬ ЗАЯВКУ</button>
     </form>
 </section>
-<section id="reviews" class="fade-in">
+<section id="reviews">
     <h2>ОТЗЫВЫ КЛИЕНТОВ</h2>
 
-    <div class="reviews-grid">
+    <div class="reviews-grid" id="reviewsGrid">
 
-        <div class="review-card">
+        <!-- ФИКСИРОВАННЫЕ ОТЗЫВЫ -->
+        <div class="review-card fixed-review">
             <div class="review-header">
                 <div class="avatar">ИП</div>
                 <div>
@@ -1405,14 +1528,10 @@ form button:hover {
                     <div class="stars">★★★★★</div>
                 </div>
             </div>
-            <p>
-                Заказывали строительство дома под ключ.
-                Всё выполнено качественно, в срок и без лишних вопросов.
-                Однозначно рекомендую!
-            </p>
+            <p>Строили дом под ключ. Всё чётко, по договору и в срок. Рекомендую!</p>
         </div>
 
-        <div class="review-card">
+        <div class="review-card fixed-review">
             <div class="review-header">
                 <div class="avatar">АК</div>
                 <div>
@@ -1420,36 +1539,38 @@ form button:hover {
                     <div class="stars">★★★★★</div>
                 </div>
             </div>
-            <p>
-                Делали ремонт квартиры. Очень аккуратно,
-                помогли с выбором материалов, результатом довольны.
-            </p>
+            <p>Делали ремонт квартиры — аккуратно, помогли с материалами.</p>
         </div>
 
-        <div class="review-card">
-            <div class="review-header">
-                <div class="avatar">СМ</div>
-                <div>
-                    <strong>Сергей Михайлов</strong>
-                    <div class="stars">★★★★★</div>
-                </div>
-            </div>
-            <p>
-                Отличная команда специалистов.
-                Приятно работать с профессионалами,
-                всё прозрачно и по договору.
-            </p>
-        </div>
-<div class="review-form">
-    <h3>Оставить отзыв</h3>
-    <form onsubmit="alert('Спасибо за отзыв! ❤️'); return false;">
-        <input type="text" placeholder="Ваше имя" required>
-        <textarea rows="4" placeholder="Ваш отзыв" required></textarea>
-        <button>Отправить отзыв</button>
-    </form>
-</div>
     </div>
-</section>
+
+    <!-- КНОПКА -->
+    <button class="reviews-toggle" onclick="toggleReviews()">
+        Показать все отзывы
+    </button>
+
+    <!-- ФОРМА -->
+    <div class="review-form">
+        <h3>Оставить отзыв</h3>
+
+        <form id="reviewForm">
+            <input type="text" id="reviewName" placeholder="Ваше имя" required>
+
+            <!-- ЗВЁЗДЫ -->
+            <div class="rating">
+                <span data-rate="1">★</span>
+                <span data-rate="2">★</span>
+                <span data-rate="3">★</span>
+                <span data-rate="4">★</span>
+                <span data-rate="5">★</span>
+            </div>
+
+            <textarea id="reviewText" rows="4" maxlength="300"
+                placeholder="Ваш отзыв (до 300 символов)" required></textarea>
+
+            <button type="submit">Отправить отзыв</button>
+        </form>
+    </div>
 </section>
 <!-- Весь основной контент сайта -->
 <footer>
@@ -1733,6 +1854,82 @@ function botReply(type) {
     }, 400);
 }
 </script>
+</script>
+<script>
+const reviewsGrid = document.getElementById('reviewsGrid');
+const form = document.getElementById('reviewForm');
+const stars = document.querySelectorAll('.rating span');
+let rating = 5;
+
+document.addEventListener('DOMContentLoaded', () => {
+</script>
+<script>
+const reviewsGrid = document.getElementById('reviewsGrid');
+const form = document.getElementById('reviewForm');
+const stars = document.querySelectorAll('.rating span');
+let rating = 5;
+
+// --- ЗВЁЗДЫ ---
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        rating = star.dataset.rate;
+        stars.forEach(s => s.classList.remove('active'));
+        star.classList.add('active');
+        for (let i = 0; i < stars.length; i++) {
+            if (stars[i].dataset.rate <= rating) {
+                stars[i].classList.add('active');
+            }
+        }
+    });
+});
+
+// --- ЗАГРУЗКА ОТЗЫВОВ ---
+const savedReviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+savedReviews.forEach(addReview);
+
+// --- ОТПРАВКА ---
+form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const name = reviewName.value.trim();
+    const text = reviewText.value.trim();
+    if (!name || !text) return;
+
+    const review = { name, text, rating };
+    savedReviews.unshift(review);
+    localStorage.setItem('userReviews', JSON.stringify(savedReviews));
+
+    addReview(review, true);
+    form.reset();
+});
+
+// --- СОЗДАНИЕ КАРТОЧКИ ---
+function addReview(review, toTop = false) {
+    const initials = review.name.split(' ').map(w => w[0]).join('').slice(0,2);
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+        <div class="review-header">
+            <div class="avatar">${initials}</div>
+            <div>
+                <strong>${review.name}</strong>
+                <div class="stars">${'★'.repeat(review.rating)}</div>
+            </div>
+        </div>
+        <p>${review.text}</p>
+    `;
+
+    toTop ? reviewsGrid.appendChild(card) : reviewsGrid.appendChild(card);
+}
+
+// --- ПОКАЗ ВСЕХ ---
+function toggleReviews() {
+    document.querySelectorAll('.review-card').forEach(card => {
+        card.style.display = 'block';
+    });
+    document.querySelector('.reviews-toggle').style.display = 'none';
+}
 </script>
 </body>
 </html>
