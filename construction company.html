@@ -1299,10 +1299,6 @@ body {
     font-size: 14px;
   }
 }
-#about {
-  padding: 60px 0;
-}
-
 .about-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -1336,15 +1332,6 @@ body {
   color: #333;
 }
 
-/* СЛАЙДЫ */
-.about-slide {
-  display: none;
-}
-
-.about-slide.active {
-  display: block;
-}
-
 /* ЦИФРЫ */
 .stats-grid {
   display: grid;
@@ -1362,7 +1349,7 @@ body {
 .stat-card span {
   font-size: 28px;
   font-weight: bold;
-  color: #ffad14;
+  color:#ffad14;
 }
 
 .stat-card p {
@@ -1370,7 +1357,7 @@ body {
   font-size: 14px;
 }
 
-/* ПРОЕКТЫ */
+/* ПРОЕКТЫ*/ 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1378,7 +1365,7 @@ body {
 }
 
 .project-card {
-  background: #e9e9e9;
+  background: #ffad14;
   border-radius: 14px;
   padding: 12px;
   text-align: center;
@@ -1395,79 +1382,193 @@ body {
   justify-content: center;
   color: #777;
 }
+/* ===== ABOUT SECTION ===== */
 
-/* СТРЕЛКА */
-.about-arrow {
-  position: absolute;
-  right: -22px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  background: #ffad14;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 20px;
+#about {
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.about-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-slider {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.8s ease-in-out;
+  width: 100%;
 }
 
-.about-arrow:hover {
-  transform: translateY(-50%) scale(1.1);
+.about-slide {
+  min-width: 100%;
+  flex-shrink: 0;
 }
-/* ===== НАШИ ПРОЕКТЫ ===== */
+
+.about {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ТЕКСТ */
+.about-text {
+  max-width: 520px;
+}
+
+.about-text p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+}
+
+/* СТАТИСТИКА */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.stat span {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.stat p {
+  font-size: 14px;
+}
+
+/* ===== PROJECTS ===== */
 
 .projects {
-  margin: 40px 0;
+  padding: 20px;
 }
 
 .projects-title {
-  font-size: 26px;
-  margin-bottom: 25px;
-  color: #222;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 30px;
 }
 
 .project-card {
-  background: #eaeaea;
-  border-radius: 14px;
-  padding: 18px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
 }
 
 .project-image {
-  height: 160px;
-  background: #d5d5d5;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  color: #777;
+  height: 200px;
+  background: #e5e5e5;
+  margin-bottom: 15px;
 }
 
-.project-card h3 {
-  margin: 0 0 6px;
-  font-size: 18px;
+/* ===== MOBILE ===== */
+
+@media (max-width: 900px) {
+  .about {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ===== ABOUT & PROJECTS ALIGN ===== */
+
+#about {
+  padding: 60px 0;
 }
 
-.project-card p {
-  margin: 0;
-  font-size: 14px;
-  color: #555;
+/* Заголовки — как в других секциях */
+.about-title,
+.projects-title {
+  text-align: left;
+  margin-bottom: 30px;
+  position: relative;
+  font-weight: 600;
+}
+
+.about-title::after,
+.projects-title::after {
+  content: "";
+  display: block;
+  width: 55px;
+  height: 3px;
+  background: #f7931e;
+  margin-top: 10px;
+}
+
+/* ===== О НАС — чуть компактнее ===== */
+
+.about {
+  gap: 40px;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ===== ПРОЕКТЫ: КОМПАКТНЫЙ БЛОК ===== */
+
+.projects {
+  padding: 0;
+}
+
+.projects-grid {
+  gap: 25px;
+}
+
+/* ===== ABOUT & PROJECTS ALIGN ===== */
+
+#about {
+  padding: 60px;
+}
+
+.about-title,
+.projects-title {
+  text-align: left;
+  margin-bottom: 30px;
+  position: relative;
+  font-weight: 600;
+}
+
+.about-title::after,
+.projects-title::after {
+  content: "";
+  display: block;
+  width: 55px;
+  height: 3px;
+  background: #f7931e;
+  margin-top: 10px;
+}
+
+/* ===== О НАС — чуть компактнее ===== */
+
+.about {
+  gap: 20px;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+
+.projects-grid {
+  gap: 25px;
 }
     </style>
 </head>
@@ -1898,73 +1999,81 @@ body {
     </div>
 </div>
 <section id="about">
-    <h2>О НАС</h2>
+  <h2 class="about-title">О НАС</h2>
 
-    <div class="about">
-        <div class="about-text">
-            <p>
-                Мы — современная строительная компания с полным циклом работ:
-                от проектирования до сдачи объекта «под ключ».
-                Работаем честно, по договору и строго соблюдаем сроки.
-            </p>
+  <div class="about-wrapper">
+    <div class="about-slider">
 
-            <p>
-                В нашей команде — опытные инженеры, строители и дизайнеры,
-                которые используют только проверенные технологии и материалы.
-                Для нас важно качество, безопасность и доверие клиентов.
-            </p>
+      <!-- СЛАЙД: НАШИ -->
+      <div class="about-slide active">
+        <div class="about">
 
+          <div class="about-text">
             <p>
-                Мы строим дома, коммерческие здания, выполняем ремонты,
-                благоустраиваем территории и сопровождаем проекты
-                на всех этапах строительства.
+              Мы — современная строительная компания, специализирующаяся
+              на проектировании и строительстве жилых и коммерческих объектов.
             </p>
+            <p>
+              Наша команда объединяет опытных инженеров, архитекторов и строителей,
+              которые работают по современным стандартам качества.
+            </p>
+            <p>
+              Мы сопровождаем проекты на всех этапах — от идеи до ввода объекта
+              в эксплуатацию, гарантируя надежность и прозрачность.
+            </p>
+          </div>
+
+          <div class="about-stats">
+            <div class="stat">
+              <span>10+</span>
+              <p>лет опыта</p>
+            </div>
+            <div class="stat">
+              <span>250+</span>
+              <p>проектов</p>
+            </div>
+            <div class="stat">
+              <span>50+</span>
+              <p>сотрудников</p>
+            </div>
+            <div class="stat">
+              <span>100%</span>
+              <p>довольных клиентов</p>
+            </div>
+          </div>
+
         </div>
-
-        <div class="about-stats">
-            <div class="stat">
-                <span>10+</span>
-                <p>лет опыта</p>
-            </div>
-            <div class="stat">
-                <span>250+</span>
-                <p>реализованных проектов</p>
-            </div>
-            <div class="stat">
-                <span>50+</span>
-                <p>сотрудников в штате</p>
-            </div>
-            <div class="stat">
-                <span>100%</span>
-                <p>довольных клиентов</p>
-            </div>
-        </div>
-    </div>
-    <section class="projects">
-  <div class="container">
-    <h2 class="projects-title">Наши проекты</h2>
-
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-image">Фото</div>
-        <h3>Частный дом</h3>
-        <p>180 м² · Под ключ</p>
       </div>
 
-      <div class="project-card">
-        <div class="project-image">Фото</div>
-        <h3>Коммерческий объект</h3>
-        <p>320 м² · Строительство</p>
+      <!-- СЛАЙД: НАШИ ПРОЕКТЫ -->
+      <div class="about-slide">
+        <section class="projects">
+          <h2 class="projects-title">НАШИ ПРОЕКТЫ</h2>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="project-image"></div>
+              <h3>ЧАСТНЫЙ ДОМ</h3>
+              <p>180 м² · Под ключ</p>
+            </div>
+
+            <div class="project-card">
+              <div class="project-image"></div>
+              <h3>КОММЕРЧЕСКИЙ ОБЪЕКТ</h3>
+              <p>320 м² · Строительство</p>
+            </div>
+
+            <div class="project-card">
+              <div class="project-image"></div>
+              <h3>КОТТЕДЖ</h3>
+              <p>240 м² · Проект + стройка</p>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <div class="project-card">
-        <div class="project-image">Фото</div>
-        <h3>Коттедж</h3>
-        <p>240 м² · Проект + стройка</p>
-      </div>
     </div>
   </div>
-</section>
 </section>
 <section class="cta">
   <h2>Нужна консультация?</h2>
@@ -2573,6 +2682,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+</script>
+<script>
+const slider = document.querySelector('#about .about-slider');
+const slides = document.querySelectorAll('#about .about-slide');
+
+let index = 0;
+
+setInterval(() => {
+  index = (index + 1) % slides.length;
+  slider.style.transform = `translateX(-${index * 100}%)`;
+}, 5000);
 </script>
 </body>
 </html>
