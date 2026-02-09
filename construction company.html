@@ -1555,7 +1555,7 @@ body {
   margin-top: 10px;
 }
 
-/* ===== О НАС — чуть компактнее ===== */
+/* ===== О НАС = */
 
 .about {
   gap: 20px;
@@ -1581,7 +1581,7 @@ body {
 
 .step {
   background: rgba(255,255,255,0.08);
-  padding: 10px 16px;
+  padding: 10px 10px;
   border-radius: 20px;
   font-size: 14px;
   color: #fff;
@@ -1637,6 +1637,43 @@ body {
 @keyframes arrowPulse {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
+}
+section > h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  position: relative;
+  padding-left: 18px;
+}
+
+section > h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 70%;
+  background: #ffad14;
+  border-radius: 3px;
+}
+main section {
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+p {
+  line-height: 1.7;
+  color: #444;
 }
     </style>
 </head>
