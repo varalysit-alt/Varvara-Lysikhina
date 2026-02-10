@@ -1671,9 +1671,68 @@ main section {
     transform: translateY(0);
   }
 }
-p {
-  line-height: 1.7;
-  color: #444;
+/* Основной стиль меню */
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
+}
+
+.header-nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 15px;
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+.header-nav ul li a:hover {
+  color: #ff7f50; /* например, яркий акцент */
+}
+
+/* Для dropdown */
+.has-dropdown {
+  position: relative; /* важно для абсолютного позиционирования */
+}
+
+.has-dropdown .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  gap: 12px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  max-width: 600px;
+  overflow-x: auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.has-dropdown:hover .dropdown {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Карточки внутри dropdown */
+.why-card {
+  flex: 0 0 140px;       /* фиксированная ширина */
+  background: #ffad14;   /* яркая карточка */
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  white-space: normal;
 }
     </style>
 </head>
@@ -1830,7 +1889,26 @@ p {
   <div class="arrow">→</div>
   <div class="step">Замер</div>
   <div class="arrow">→</div>
-  <div class="step">Проект</div>
+  <div class="step">Проект
+    <div class="dropdown">
+          <div class="why-card">
+            <h3>Фиксированные сроки</h3>
+            <p>Все этапы выполняются вовремя без задержек.</p>
+          </div>
+          <div class="why-card">
+            <h3>Прозрачная смета</h3>
+            <p>Стоимость фиксируется в договоре и не меняется.</p>
+          </div>
+          <div class="why-card">
+            <h3>Контроль качества</h3>
+            <p>Мы контролируем каждый этап строительства.</p>
+          </div>
+          <div class="why-card">
+            <h3>Гарантия</h3>
+            <p>На все работы предоставляется гарантия.</p>
+          </div>
+        </div>
+  </div>
   <div class="arrow">→</div>
   <div class="step">Договор</div>
   <div class="arrow">→</div>
