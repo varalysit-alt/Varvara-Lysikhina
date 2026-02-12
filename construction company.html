@@ -1816,7 +1816,7 @@ main section {
   transform: translateX(-50%) scale(0.95);
 
   width: 320px;
-  background: #ffb400;
+  background: #5cc909;
   border-radius: 14px;
   padding: 16px;
 
@@ -1851,6 +1851,74 @@ main section {
 .project-item p {
   margin: 0;
   font-size: 13px;
+}
+/* Вся секция на всю ширину */
+.promo-full {
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+/* Общий фон */
+.promo-slider {
+  position: relative;
+  height: 360px;
+  background: linear-gradient(
+    135deg,
+    #ffb400,
+    #ffb400
+  );
+  overflow: hidden;
+}
+
+/* Слайды */
+.promo-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.promo-slide.active {
+  opacity: 1;
+}
+
+/* Текст */
+.promo-text {
+  max-width: 680px;
+  padding: 60px 0;
+  color: #fff;
+}
+
+.promo-text h2 {
+  font-size: 36px;
+  margin-bottom: 14px;
+}
+
+.promo-text p {
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+  opacity: 0.95;
+}
+
+/* Список */
+.promo-text ul {
+  list-style: none;
+}
+
+.promo-text li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.promo-text li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #1c1c1c;
+  font-weight: 700;
 }
     </style>
 </head>
@@ -2044,36 +2112,61 @@ main section {
     </nav>
 </header>
 <!-- PROMO БЛОК -->
-<section class="promo">
-  <div class="promo-slider">
-    <button class="promo-arrow left">‹</button>
+<section class="promo-section">
+  <div class="container">
 
-    <div class="promo-slide active">
-      <div class="promo-text">
-        <h2>Впереди праздники</h2>
-        <p>Акции и выгодные предложения</p>
-        <a href="#" class="promo-btn">Смотреть</a>
+    <div class="promo-slider">
+
+      <!-- Слайд 1 -->
+      <div class="promo-slide active" style="background-image:url('img/promo-dacha.jpg')">
+        <div class="promo-text">
+          <h2>Весна и дача — время строить</h2>
+          <p>
+            Всё для дачных работ и ремонта: стройматериалы, инструменты,
+            сухие смеси и пиломатериалы в наличии.
+          </p>
+          <ul>
+            <li>Материалы для дома и участка</li>
+            <li>Помощь с расчётом и подбором</li>
+            <li>Доставка по городу и области</li>
+          </ul>
+        </div>
       </div>
-      <img src="img/promo1.png" alt="">
+
+      <!-- Слайд 2 -->
+      <div class="promo-slide" style="background-image:url('img/promo-holiday.jpg')">
+        <div class="promo-text">
+          <h2>Скоро праздники</h2>
+          <p>
+            Готовим полезные подарки к 23 февраля и 8 марта —
+            для дома, дачи и ремонта.
+          </p>
+          <ul>
+            <li>Идеи подарков для мужчин и женщин</li>
+            <li>Готовые наборы инструментов</li>
+            <li>Подарочные сертификаты</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Слайд 3 -->
+      <div class="promo-slide" style="background-image:url('img/promo-sale.jpg')">
+        <div class="promo-text">
+          <h2>Акция дня</h2>
+          <p>
+            При покупке от <strong>10 000 ₽</strong> —
+            полезный подарок для строительства или ремонта.
+          </p>
+          <ul>
+            <li>Количество ограничено</li>
+            <li>Акция действует сегодня</li>
+            <li>Подробности у менеджера</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
-    <div class="promo-slide">
-      <div class="promo-text">
-        <h2>Весна и дача</h2>
-        <p>Всё для рассады</p>
-        <a href="#" class="promo-btn">Купить</a>
-      </div>
-      <img src="img/promo2.png" alt="">
-    </div>
-
-    <button class="promo-arrow right">›</button>
-  </div>
-
-  <div class="promo-cards">
-    <div class="card">Предложение месяца</div>
-    <div class="card">Комнатные растения</div>
-    <div class="card">Скидки</div>
-    <div class="card">Услуги</div>
   </div>
 </section>
 <section id="services" class="services-section">
@@ -3038,22 +3131,13 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 <script>
 const slides = document.querySelectorAll('.promo-slide');
-let index = 0;
+let current = 0;
 
-function showSlide(i) {
-  slides.forEach(s => s.classList.remove('active'));
-  slides[i].classList.add('active');
-}
-
-document.querySelector('.right').onclick = () => {
-  index = (index + 1) % slides.length;
-  showSlide(index);
-};
-
-document.querySelector('.left').onclick = () => {
-  index = (index - 1 + slides.length) % slides.length;
-  showSlide(index);
-};
+setInterval(() => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}, 6000);
 </script>
 </body>
 </html>
