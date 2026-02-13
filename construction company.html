@@ -1920,6 +1920,24 @@ main section {
   color: #1c1c1c;
   font-weight: 700;
 }
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  padding: 12px 14px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  z-index: 99999;
+}
+
+#scrollTopBtn:hover {
+  background: #444;
+}
     </style>
 </head>
     <body>
@@ -2682,6 +2700,8 @@ main section {
 <!-- Весь основной контент сайта -->
 <footer>
     <p>&copy; 2026 Строительная Компания.</p>
+    <p>График работы: 9:00–18:00</p>
+    <p id="workStatus"></p>
 </footer>
 
 <!-- Скрипты -->
@@ -3138,6 +3158,30 @@ setInterval(() => {
   current = (current + 1) % slides.length;
   slides[current].classList.add('active');
 }, 6000);
+</script>
+<button id="scrollTopBtn" title="Наверх">⬆</button>
+<script>
+const scrollBtn = document.getElementById('scrollTopBtn');
+
+window.addEventListener('scroll', () => {
+  scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+});
+
+scrollBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+<script>
+const statusEl = document.getElementById('workStatus');
+const hour = new Date().getHours();
+
+if (hour >= 9 && hour < 18) {
+  statusEl.textContent = 'Сейчас: Открыто';
+  statusEl.style.color = 'green';
+} else {
+  statusEl.textContent = 'Сейчас: Закрыто';
+  statusEl.style.color = 'red';
+}
 </script>
 </body>
 </html>
